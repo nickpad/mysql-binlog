@@ -2,7 +2,7 @@ version: "3.2"
 services:
   master:
     build: ./master
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password --ssl
     volumes:
       - type: volume
         source: mysqldata
