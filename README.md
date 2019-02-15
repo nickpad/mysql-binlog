@@ -11,10 +11,11 @@ testing configuration changes.
 
 You'll first need to install Docker if you haven't already.
 
-Docker Compose is used to set up two containers, one acting as the master
-database instance and the second running Maxwell connected to the master.
+Docker Compose is used to set up three containers, one acting as the master
+database instance, one as a slave and the third running Maxwell connected to the
+slave.
 
-To build the master and maxwell containers for the first time, run:
+To build the containers for the first time, run:
 
 ```
 docker-compose build
@@ -32,11 +33,16 @@ And stop them by running:
 docker-compose down
 ```
 
-The master is mapped to local port 3400, and you can connect to it using
-`mysql`:
+You can open a `mysql` client on the master using:
 
 ```
-mysql --host 0.0.0.0 --port 3400 --user root -p
+docker-compose exec master mysql --user root -p
+```
+
+And similarly on the slave with:
+
+```
+docker-compose exec slave mysql --user root -p
 ```
 
 [1]: http://maxwells-daemon.io/
@@ -46,9 +52,10 @@ mysql --host 0.0.0.0 --port 3400 --user root -p
 
 It'll help to have some familiarity with Docker.
 
-The `docker-compose.yml` file configures two services, `master` and `maxwell`.
-The two containers share a network called `db` so that they can communicate.
+The `docker-compose.yml` file configures three services, `master`, `slave` and
+`maxwell`. The containers share a network called `db` so that they can
+communicate.
 
-To understand how the `master` and `maxwell` containers are configured, look at
-the files in the `master` and `maxwell` directories. There are comments in each
-file to explain what's going on.
+To understand how the containers are configured, look at the files in the
+`slave` and `maxwell` directories. There are comments in each file to explain
+what's going on.

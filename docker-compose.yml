@@ -1,16 +1,29 @@
 version: "3.2"
 services:
   master:
-    build: ./master
-    command: --default-authentication-plugin=mysql_native_password --ssl
+    image: mysql:8.0.15
+    command: --default-authentication-plugin=mysql_native_password --ssl --server-id=1
     volumes:
       - type: volume
-        source: mysqldata
+        source: master
         target: /var/lib/mysql
     networks:
       - db
     ports:
       - "3400:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+  slave:
+    build: ./slave
+    command: --default-authentication-plugin=mysql_native_password --ssl --server-id=2
+    volumes:
+      - type: volume
+        source: slave
+        target: /var/lib/mysql
+    networks:
+      - db
+    ports:
+      - "3401:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=test
   maxwell:
@@ -21,4 +34,5 @@ services:
 networks:
   db:
 volumes:
-  mysqldata:
+  master:
+  slave:
