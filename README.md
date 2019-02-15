@@ -4,8 +4,8 @@ This repo provides a minimal config for setting up [Maxwell][1] to read the
 [MySQL binlog][2].
 
 This is not intended in any way to be put into production. Instead it's a
-starting point for understanding how to configure streaming replication and an
-easy way of testing configuration changes.
+starting point for understanding how to configure Maxwell and an easy way of
+testing configuration changes.
 
 ## Getting started
 
