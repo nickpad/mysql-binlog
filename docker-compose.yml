@@ -15,7 +15,7 @@ services:
       - MYSQL_ROOT_PASSWORD=test
   slave:
     build: ./slave
-    command: --default-authentication-plugin=mysql_native_password --ssl --server-id=2
+    command: --default-authentication-plugin=mysql_native_password --ssl --server-id=2 --relay-log=slave-relay-bin
     volumes:
       - type: volume
         source: slave
