@@ -6,4 +6,4 @@ set -e
 wait-for-it --timeout=120 slave:3306
 
 # Run Maxwell, configured to print each change to STDOUT in JSON format.
-bin/maxwell --user='maxwell' --password='test' --host='slave' --producer='stdout' --ssl='REQUIRED'
+bin/maxwell --user="$MAXWELL_USER" --password="$MAXWELL_PASSWORD" --host='slave' --producer='stdout' --ssl='REQUIRED'

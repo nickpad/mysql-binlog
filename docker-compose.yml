@@ -26,11 +26,17 @@ services:
       - "3401:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=test
+      - MAXWELL_USER=maxwell
+      - MAXWELL_PASSWORD=test
+      - MYSQL_MASTER_ROOT_PASSWORD=test
   maxwell:
     build: ./maxwell
     command: /run.sh
     networks:
       - db
+    environment:
+      - MAXWELL_USER=maxwell
+      - MAXWELL_PASSWORD=test
 networks:
   db:
 volumes:
